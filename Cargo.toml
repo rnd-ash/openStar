@@ -1,0 +1,8 @@
+[workspace]
+members = [
+    "diagnostics",
+    "filehandler",
+    "hardware",
+    "open_star",
+    "simloader"
+]

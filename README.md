@@ -18,3 +18,10 @@ Since Daimler have abandoned DAS, and appear to be gluing functionality to Xentr
 
 ## Submitting an issue
 Issues should be submitted via the issues tab. IMPORTANT: If referencing a file from DAS/Xentry, **DO NOT** include the file as an attachment. Instead, just note the file path. If a file from DAS/Xentry is included then the issue will be removed without notice.
+
+## Repository structure
+* hardware - Hardware library for various adapters to allow communication with vehicle ECUs
+* simloader - Loader and executor for Daimler's SIM files (ECU simulation)
+* open_star - OpenStar diagnostic application
+* filehandler - Handler API for files used by the software such as CBF,SMRD
+* diagnostics - Library for implementation of KWP2000 and UDS
