@@ -4,11 +4,11 @@ An opensource diagnostic application for Daimler vehicles inspired by DAS and Xe
 
 **If you decide to use this software on your own vehicle, there is NO liablity if something goes wrong!**
 
-Since Daimler have abandoned DAS, and appear to be gluing functionality to Xentry with tape, This program is an attempt at making a better alternative to both applications, which have loads of bugs and are overly bloated.
+Since Daimler have abandoned DAS, and appear to be gluing functionality to Xentry with tape, This program is an attempt at making a better alternative to both applications, which have loads of bugs and are overly bloated. For a full list of bugs and issues with Daimlers own software, see [DaimlerBugs.md](DaimlerBugs.md)
 
 ## Project goals
 * Merge functionalities of DAS and Xentry into one program
-* Cross platoform support (Including use of SocketCAN on Linux)
+* Cross platform support (Including use of SocketCAN on Linux)
 * Modular structure with cbindgen creating C++ Headers for certain modules such as file loading or vehicle communication
 * Fix multiple bugs in DAS or Caesar which Daimler doesn't seem to want to fix
 
