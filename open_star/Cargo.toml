@@ -6,3 +6,10 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+logger = { path = "../logger" }
+hardware = { path = "../hardware" }
+filehandler = { path = "../filehandler" }
+diagnostics = { path = "../diagnostics" }
+iced = {version = "0.3", features = ["glow", "image"]}
+native-dialog = "0.5.5"
+nfd2 = "0.3.0"
