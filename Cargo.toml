@@ -4,5 +4,6 @@ members = [
     "filehandler",
     "hardware",
     "open_star",
-    "simloader"
+    "simloader",
+    "logger"
 ]

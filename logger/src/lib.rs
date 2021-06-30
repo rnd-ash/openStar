@@ -5,7 +5,7 @@ pub trait Loggable {
     fn to_log_string(&self) -> String;
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Default)]
 pub struct Logger{
     module_name: String
 }

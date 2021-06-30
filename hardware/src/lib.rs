@@ -1,7 +1,9 @@
-use std::fmt::Debug;
+use std::fmt::{Debug, format};
 
+use communication_apis::passthru;
 use data_structures::HwDataFrame;
 use j2534_rust::Loggable;
+use logger::Logger;
 
 pub mod data_structures;
 mod communication_apis;
@@ -78,7 +80,7 @@ pub enum IoctlIdentifier {
     P1_MAX(u32),
     /// ISO 9141 minimum ECU response time
     P2_MIN(u32),
-    /// ISO 0141 maximum ECU response time
+    /// ISO 9141 maximum ECU response time
     P2_MAX(u32),
     /// ISO 9141 minimum ECU response time between response and next request
     P3_MIN(u32),
@@ -254,4 +256,66 @@ pub trait AdapterHardware: Sized + Sync + Send + Debug + Clone {
         self.close_device()?;
         self.open_device()
     }
+}
+
+
+
+#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord)]
+pub enum HardwareAPI {
+    None,
+    Passthru,
+    Pdu,
+    Sd,
+    Sim,
+    #[cfg(unix)]
+    SocketCAN
+}
+
+impl std::fmt::Display for HardwareAPI {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            HardwareAPI::None => f.write_str("NULL"),
+            HardwareAPI::Passthru => f.write_str("Passthru"),
+            HardwareAPI::Pdu => f.write_str("D-PDU"),
+            HardwareAPI::Sd => f.write_str("SDConnect"),
+            HardwareAPI::Sim => f.write_str("Simulation"),
+            #[cfg(unix)]
+            HardwareAPI::SocketCAN => f.write_str("SocketCAN"),
+        }
+    }
+}
+
+impl Default for HardwareAPI {
+    fn default() -> Self {
+        HardwareAPI::None
+    }
+}
+
+pub fn get_device_list(api: HardwareAPI) -> Vec<String> {
+    let logger = Logger::new("Hardware");
+    match api {
+        HardwareAPI::Sim => vec!["OpenStar-Simulation".into()],
+        HardwareAPI::Passthru => {
+            logger.log_debug("Scanning for Passthru devices".into());
+            match passthru::PassthruDevice::find_all() {
+                Ok(ptd) => {
+                    for d in &ptd {
+                        logger.log_debug(format!("=> Found passthru device: {}", d.name));
+                    }
+                    ptd.iter().map(|s| s.name.clone()).collect()
+                },
+                Err(e) => {
+                    logger.log_err(format!("=> Scanning for Passthru devices failed: {:?}", e));
+                    Vec::new()
+                }
+            }
+        }
+        _ => Vec::new()
+    }
+}
+
+pub fn open_device(name: &str, api: HardwareAPI) -> bool {
+    let logger = Logger::new("Hardware");
+    logger.log_debug(format!("Trying to open device '{}' using {} API", name, api));
+    return true;
 }

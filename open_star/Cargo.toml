@@ -13,3 +13,5 @@ diagnostics = { path = "../diagnostics" }
 iced = {version = "0.3", features = ["glow", "image"]}
 native-dialog = "0.5.5"
 nfd2 = "0.3.0"
+image = "0.23.12"
+lazy_static="1.4.0"
