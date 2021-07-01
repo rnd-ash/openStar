@@ -11,10 +11,12 @@ env:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
+    - name: Install dependencies
+      run: |
+        sudo apt-get -qq update
+        sudo apt-get install -y libxkbcommon-dev libgtk-3-0
     - uses: actions/checkout@v2
     - name: Build
       run: cargo build --verbose
