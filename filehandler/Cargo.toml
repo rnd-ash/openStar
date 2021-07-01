@@ -7,3 +7,4 @@ edition = "2018"
 
 [dependencies]
 configparser = "2.1.0"
+logger = { path = "../logger" }

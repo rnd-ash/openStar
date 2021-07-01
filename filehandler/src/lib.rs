@@ -2,6 +2,7 @@ pub mod ini;
 
 use std::path::PathBuf;
 
+pub mod DAS;
 
 static mut DAS_PATH: String = String::new();
 static mut XEN_PATH: String = String::new();
